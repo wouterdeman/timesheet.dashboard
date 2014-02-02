@@ -1,0 +1,209 @@
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+    <!--li class="active"><a ng-href="#">Home</a></li-->
+  </ul>
+  <h1 class="text-muted">Dashboard</h1>
+</div>
+<section>
+  <div class="gridster">
+      <ul>
+          <li class="grwidget" data-row="1" data-col="1" data-sizex="3" data-sizey="1">
+            <div class="widget widget-text">
+                <h3 class="title">Welcome</h3>
+                <h4>This is our new dashboard.</h4>
+                <div class="more-info">Tip: You can drag and resize the widgets.</div>
+            </div>
+          </li>
+          <li class="grwidget" data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+            <div class="widget widget-number">
+                <h3 class="title">Entries</h3>
+                <h3 class="change-rate">{{count}}</h3>
+            </div>
+          </li>
+          <li class="grwidget" data-row="1" data-col="3" data-sizex="2" data-sizey="3">
+              <div class="widget widget-list">
+                <h1 class="title">Last 10</h1>
+
+              <ul class="list-nostyle">
+                <li ng-repeat="entry in last10">
+                  <span class="label">{{entry.user}} ({{entry.time | date:'dd/MM/yy @ HH:mm:ss'}}})</span>
+                  <span class="value"><a href="http://maps.google.com/maps?z=15&t=m&q={{entry.loc[0]}},{{entry.loc[1]}}" target="_blank">Maps</a></span>
+                </li>
+              </ul>
+              </div>
+          </li>         
+           <li class="grwidget" data-row="2" data-col="2" data-sizex="2" data-sizey="2">
+              <div class="widget widget-list purple-background">
+                <h1 class="title">Last location</h1>
+
+              <ul class="list-nostyle">
+                <li ng-repeat="entry in userlocations">
+                  <span class="label">{{entry.user}} ({{entry.time | date:'dd/MM/yy @ HH:mm:ss'}}})</span>
+                  <span class="value"><a href="http://maps.google.com/maps?z=15&t=m&q={{entry.loc[0]}},{{entry.loc[1]}}" target="_blank">Maps</a></span>
+                </li>
+              </ul>
+              </div>
+          </li>         
+      </ul>
+  </div>
+</section>
+
+<style>
+.widget {
+  padding: 25px 12px;  
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.widget-text {
+  background-color: #ec663c;
+}
+
+.widget-text .title {
+  color: rgba(255, 255, 255, 0.7);
+}
+.widget-text .more-info {
+    color: rgba(255, 255, 255, 0.7); }  
+
+.widget-meter {
+background-color: #9c4274;
+}
+
+.widget-meter .title {
+color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-list {
+background-color: #12b0c5;
+vertical-align: top;
+}
+
+.widget-list .title {
+color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-list ol, .widget-list ul {
+    text-align: left;
+    padding-left: 0px;
+    color: rgba(255, 255, 255, 0.7); }
+  .widget-list ol {
+    list-style-position: inside; }
+  .widget-list li {
+    margin-bottom: 5px; }
+
+.widget-list .list-nostyle {
+    list-style: none; }
+  .widget-list .label {
+    color: rgba(255, 255, 255, 0.7); }
+  .widget-list .value, .widget-list .value a {
+    float: right;
+    margin-left: 12px;
+    font-weight: 600;
+    color: white; }
+
+.widget-number {
+  background-color: #47bbb3; }
+  .widget-number .title {
+    color: rgba(255, 255, 255, 0.7); }
+  .widget-number .value {
+    color: white; }
+  .widget-number .change-rate {
+    font-weight: 500;
+    font-size: 30px;
+    color: white; }
+
+.purple-background {
+  background-color: #9c4274;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+/* Gridster styles */
+.gridster {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.gridster .gs-w {
+    background-color: #ec663c;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.gridster .player {
+    -webkit-box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+}
+
+
+.gridster .gs-w.try {
+    background-image: url(../img/sprite.png);
+    background-repeat: no-repeat;
+    background-position: 37px -169px;
+
+}
+
+.gridster .preview-holder {
+    border: none!important;
+    border-radius: 0!important;
+    /*background: rgba(255,255,255,.2)!important;*/
+    /*opacity: 0.1;*/
+    background: gray;
+}
+
+</style>
+
+<script>
+$(function(){ //DOM Ready
+    $(".gridster ul").gridster({
+        widget_margins: [10, 10],
+        widget_base_dimensions: [140, 140],
+        widget_selector: 'li.grwidget',
+        resize: {
+          enabled: true
+        }
+    });
+ 
+});
+</script>
+
+<!--div class="jumbotron">
+  <h1>'Allo, 'Allo!</h1>
+  <p class="lead">
+    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
+    Always a pleasure scaffolding your apps.
+  </p>
+  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
+</div>
+
+<div class="row marketing">
+  <h4>HTML5 Boilerplate</h4>
+  <p>
+    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
+  </p>
+
+  <h4>Angular</h4>
+  <p>
+    AngularJS is a toolset for building the framework most suited to your application development.
+  </p>
+
+  <h4>Karma</h4>
+  <p>Spectacular Test Runner for JavaScript.</p>
+</div-->
+
+<div class="footer">
+  <p>♥ from the bITe team</p>
+</div>
