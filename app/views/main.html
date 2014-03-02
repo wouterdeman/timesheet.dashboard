@@ -25,7 +25,7 @@
 
               <ul class="list-nostyle">
                 <li ng-repeat="entry in last10">
-                  <span class="label">{{entry.user}} ({{entry.time | date:'dd/MM/yy @ HH:mm:ss'}}})</span>
+                  <span class="label">{{entry.user}} ({{entry.time | date:'dd/MM/yy HH:mm:ss'}}})</span>
                   <span class="value"><a href="http://maps.google.com/maps?z=15&t=m&q={{entry.loc[0]}},{{entry.loc[1]}}" target="_blank">Maps</a></span>
                 </li>
               </ul>
@@ -37,7 +37,7 @@
 
               <ul class="list-nostyle">
                 <li ng-repeat="entry in userlocations">
-                  <span class="label">{{entry.user}} ({{entry.time | date:'dd/MM/yy @ HH:mm:ss'}}})</span>
+                  <span class="label">{{entry.user}} ({{entry.time | date:'dd/MM/yy HH:mm:ss'}}})</span>
                   <span class="value"><a href="http://maps.google.com/maps?z=15&t=m&q={{entry.loc[0]}},{{entry.loc[1]}}" target="_blank">Maps</a></span>
                 </li>
               </ul>
