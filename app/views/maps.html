@@ -36,7 +36,7 @@
       </script>
 
 
-       <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/src/markerwithlabel.js">
+       <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/maplabel/src/maplabel.js">
       </script>
       
 
@@ -50,13 +50,13 @@
 
         var drawCircle=function(theMap, theData, radius){
 
-         /*   var mapLabel = new MarkerLabel_({
-                       text: 'Test',
-                       position:theData.location,
+           var mapLabel = new MapLabel({
+                       text: theData.details.firstname,
+                       position: new google.maps.LatLng(theData.loc[0], theData.loc[1]),
                        map: theMap,
-                       fontSize: 20,
+                       fontSize: 10,
                        align: 'right'
-                     });*/
+                     });
 
               var populationOptions = {
                 strokeColor: '#FF0000',
@@ -69,7 +69,10 @@
                 radius:  1000*(1+(radius/20))
               };
             var cityCircle = new google.maps.Circle(populationOptions);
-            return cityCircle;
+            return {
+              label: mapLabel,
+              circle: cityCircle
+            };
         };
         var toTime=new Date();
         var fromTime=new Date(toTime.getTime() - 30*24*60*60000);
@@ -92,7 +95,8 @@
                   fromTime = new Date(fromTime.getTime() + 6*60000);
 
                   _.forEach(circles,function(c){
-                      c.setMap(null);
+                      c.circle.setMap(null);
+                      c.label.setMap(null);
                   })
                   circles=[];
                   
