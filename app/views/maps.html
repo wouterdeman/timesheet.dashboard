@@ -19,7 +19,10 @@
     <body>
         bITe proudly presents:.<br/> 
         We know what you did last 30 days. The movie.<br/> 
+
+        <button id="prev"> << </button> <button id="next"> >> </button>
         <div id="time"></div>
+
         <div id="map-canvas"/>
         
 
@@ -109,7 +112,12 @@
           })
 
 
-
+          $("#next").click(function(){
+              fromTime = new Date(fromTime.getTime() + 24*60*60000);
+          });
+          $("#prev").click(function(){
+              fromTime = new Date(fromTime.getTime() - 24*60*60000);
+          });
             
         };
         google.maps.event.addDomListener(window, 'load', initialize);
