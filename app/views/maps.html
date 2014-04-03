@@ -45,7 +45,7 @@
           ];
 */
 
-        var drawCircle=function(theMap, theData){
+        var drawCircle=function(theMap, theData, radius){
 
          /*   var mapLabel = new MarkerLabel_({
                        text: 'Test',
@@ -63,7 +63,7 @@
                 fillOpacity: 0.35,
                 map: theMap,
                 center: new google.maps.LatLng(theData.loc[0], theData.loc[1]),
-                radius: 1000*(1+(theData.counter/20))
+                radius:  1000*(1+(radius/20))
               };
             var cityCircle = new google.maps.Circle(populationOptions);
             return cityCircle;
@@ -97,7 +97,10 @@
                       return (new Date(d.starttime))<=fromTime && (new Date(d.endtime))>=fromTime;
                   });
                   _.forEach(dataForTheHour,function(d){
-                      circles.push(drawCircle(map,d));
+                      var diff=(new Date(d.endtime)).getTime() - (new Date(d.starttime)).getTime();
+                      var diffWithTicker=(new Date(d.endtime)).getTime() - fromTime.getTime();
+                      var counterProcent=(d.counter/diff)*(diff-diffWithTicker);
+                      circles.push(drawCircle(map,d,counterProcent));
                   })
                   $("#time").text(fromTime);
               },100);
